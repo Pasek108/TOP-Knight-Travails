@@ -78,12 +78,41 @@ def print_path(path)
 end
 
 def print_knight_path(from, to)
-  puts "Path for knight from #{from} to #{to}"
   knight_path = knight_moves(from, to)
+  knight_path_str = knight_path.map { |pos| pos.to_s.gsub(/,/, ':') }.to_s[1..-2]
+  knight_path_str = knight_path_str.gsub(/"/, '').gsub(/,/, ' ->').gsub(/:/, ',')
+
+  puts ''
+  puts "Path for knight from #{from} to #{to} takes #{knight_path.length - 1} moves"
+  puts ''
   print_path(knight_path)
   puts ''
+  puts knight_path_str
 end
 
-print_knight_path([3, 3], [4, 3])
-print_knight_path([0, 0], [3, 3])
-print_knight_path([0, 0], [7, 7])
+print_path([])
+
+loop do
+  puts "\n-------------------------------------------------------------------\n\n"
+  puts 'Input start and end positions for the knight (input \'q\' to quit):'
+  puts 'Format: [row, col], [row, col] eg. [3, 3], [4, 3]'
+  input = gets.downcase.chomp
+
+  break if input == 'q'
+
+  input = input.gsub(/[^\d|,]*/, "")
+  input = input.split(',')
+  input = input.reject(&:empty?)
+  input = input.map(&:to_i)
+
+  if input.length != 4 || input.any? { |i| !i.between?(0, 7) } 
+    puts 'Wrong input'
+    next
+  end
+
+  print_knight_path(input[0..1], input[2..3])
+end
+
+# print_knight_path([3, 3], [4, 3])
+# print_knight_path([0, 0], [3, 3])
+# print_knight_path([0, 0], [7, 7])
