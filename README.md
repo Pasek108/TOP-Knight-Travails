@@ -91,6 +91,8 @@ When the program runs, an empty board is displayed for reference. The user is th
 If the user provides invalid input, an error message is displayed and the prompt appears again.
 ![wrong input](/_for_readme/UI/wrong_input.png)
 
+---
+
 ### Answer
 When valid positions are provided, the algorithm calculates the shortest path for the knight, visualizes it on the board, and prints the path.
 ![answer](/_for_readme/UI/answer.png)
