@@ -58,10 +58,17 @@ Programs:
 
 ## Features
 ### Project requirements
-- ✅ Option to play as codebreaker or codemaker.
-- ✅ Player sets the secret code.
-- ✅ Computer makes guesses using a basic or smarter strategy.
-- ✅ Player gives feedback.
+- ✅ Implement a `knight_moves` function that finds the shortest path between two squares.  
+- ✅ Use Breadth-First Search (BFS) to explore valid knight moves.  
+- ✅ Prevent moves that go off the board.  
+- ✅ Output the full sequence of positions from start to end.  
+- ✅ Allow multiple valid shortest paths as long as the rules are followed.  
+- ✅ Provide clear feedback to the user, including number of moves and path taken.  
+
+### Additions
+- Prompting the user to input start and end positions or quit the program.
+- Validate inputs and provide error messages for invalid entries.
+- Graphical representation of the board and knight's path.
 
 ## Setup
 - Download this repository
@@ -77,9 +84,29 @@ Programs:
 
 ## User interface
 
-### Board  
-After program is run, .  
-![board](/_for_readme/board.png)  
+### Program start
+When the program runs, an empty board is displayed for reference. The user is then prompted to input the start and end positions in the specified format, or enter 'q' to quit.
+![program start](/_for_readme/UI/start.png)
+
+If the user provides invalid input, an error message is displayed and the prompt appears again.
+![wrong input](/_for_readme/UI/wrong_input.png)
+
+### Answer
+When valid positions are provided, the algorithm calculates the shortest path for the knight, visualizes it on the board, and prints the path.
+![answer](/_for_readme/UI/answer.png)
 
 ## Pathfinding algorithm
+The algorithm used to find the knight's path is a simple Breadth-First Search (BFS). It takes two positions: `from [x, y]` and `to [x, y]`, and returns the shortest sequence of knight moves between them.
 
+```
+1. Initialize a queue with the starting position and no parent: [[from x, from y, nil]].
+2. Set the index to 0. While the index is within the bounds of the queue:
+   - Check if the current position matches the target. If so, reconstruct and return the path.
+   - Generate all 8 possible knight moves from the current position.
+   - Filter out moves that are off the board or already visited.
+   - Add the valid, unvisited moves to the end of the queue, linking them to the current position as their parent.
+   - Increment the index to continue processing the next position.
+4. If the target is reached, backtrack using parent links to reconstruct the path.
+5. Return the final path in reverse order so it starts from the initial position.
+6. If the target is not found after processing all positions, return nil.
+```
