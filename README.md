@@ -104,7 +104,7 @@ The algorithm used to find the knight's path is a simple Breadth-First Search (B
    - Check if the current position matches the target. If so, reconstruct and return the path.
    - Generate all 8 possible knight moves from the current position.
    - Filter out moves that are off the board or already visited.
-   - Add the valid, unvisited moves to the end of the queue, linking them to the current position as their parent.
+   - Add the valid, unvisited moves to the queue, linking them to the current position as their parent.
    - Increment the index to continue processing the next position.
 4. If the target is reached, backtrack using parent links to reconstruct the path.
 5. Return the final path in reverse order so it starts from the initial position.
